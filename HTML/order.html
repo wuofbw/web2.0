@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Order Page</title>
+  <link rel="stylesheet" href="order.css">
+</head>
+<body>
+  <h1>Place Your Order</h1>
+  <form id="orderForm">
+    <label for="email">Email:</label>
+    <input type="email" id="email" required />
+    <label for="name">Name:</label>
+    <input type="text" id="name" required />
+
+    <fieldset>
+      <legend>Choose Food Items</legend>
+
+        <!-- Indian Vegetarian -->
+        <h3>Indian – Vegetarian</h3>
+        <label>Palak Paneer <input type="checkbox" name="items" value="Palak Paneer"></label>
+        <label>Channa Masala <input type="checkbox" name="items" value="Channa Masala "></label>
+        <label>Soya Chaap <input type="checkbox" name="items" value="Soya Chaap "></label>
+        <label> Paneer tikka <input type="checkbox" name="items" value="Paneer tikka"></label>
+        <label>Aloo Gobi <input type="checkbox" name="items" value="Aloo Gobi "></label>
+        <label>Paneer Butter Masala <input type="checkbox" name="items" value="Paneer Butter Masala"></label>
+
+        
+
+        <!-- Indian Non‑Vegetarian -->
+        <h3>Indian – Non‑Vegetarian</h3>
+        <label>Butter Chicken<input type="checkbox" name="items" value="Butter Chicken"> </label>
+        <label>Tandoori Chicken<input type="checkbox" name="items" value="Tandoori Chicken"> </label>
+        <label>Murgh Chicken Biryani<input type="checkbox" name="items" value="Murgh Chicken Biryani"></label>
+        <label>Chicken Seek Kebab<input type="checkbox" name="items" value="Chicken Seek Kebab"></label>
+        <label>Mutton Curry<input type="checkbox" name="items" value="Mutton Curry"></label>
+
+        <!-- Chinese Vegetarian -->
+        <h3>Chinese – Vegetarian</h3>
+        <label>Momos<input type="checkbox" name="items" value="Momos"></label>
+        <label>Vegetable Fried Rice<input type="checkbox" name="items" value="Vegetable Fried Rice"></label>
+        <label>Spring Rolls<input type="checkbox" name="items" value="Spring Rolls"></label>
+
+        <!-- Chinese Non‑Vegetarian -->
+        <h3>Chinese – Non‑Vegetarian</h3>
+        <label>Drums of Heaven<input type="checkbox" name="items" value="Drums of Heaven"></label>
+        <label>Chilli Chicken<input type="checkbox" name="items" value="Chilli Chicken"></label>
+        <label>Chicken Manchurian Gravy<input type="checkbox" name="items" value="Chicken Manchurian Gravy"> </label>
+
+        <!-- Indian Breads, Rice and Sweets -->
+        <h3>Indian – Breads, Rice & Sweets</h3>
+        <label>Tawa Roti<input type="checkbox" name="items" value="Tawa Roti"></label>
+        <label>Garlic Naan<input type="checkbox" name="items" value="Garlic Naan"></label>
+        <label>Jeera Rice<input type="checkbox" name="items" value="Jeera Rice"></label>
+        <label>Gulab Jamun<input type="checkbox" name="items" value="Gulab Jamun"> </label>
+      </fieldset>
+    <br><br>
+    <button type="submit">Place Order</button>
+  </form>
+  
+    <!-- Receipt Section -->
+  <section class="receipt-container" role="region" aria-label="Order Receipt">
+    <h2>Order Receipt</h2>
+    <p><strong>Name:</strong> <span id="rcptName"></span></p>
+    <p><strong>Email:</strong> <span id="rcptEmail"></span></p>
+    <p><strong>Items Ordered:</strong></p>
+    <table>
+      <thead><tr><th>#</th><th>Item</th></tr></thead>
+      <tbody id="rcptItems"></tbody>
+    </table>
+  </section>
+
+<script src="order.js"></script>
+  <script>
+    function saveEmailAndRedirect() {
+      const emailInput = document.getElementById('email');
+      const email = emailInput.value.trim();
+
+      if (!email || !email.includes("@")) {
+        alert("Please enter a valid email address.");
+        return;
+      }
+
+      localStorage.setItem("userEmail", email);
+      window.location.href = "payment.html";
+    }
+  </script>
+</body>
+</html>

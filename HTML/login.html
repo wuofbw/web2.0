@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sign In – Ranchi Zayka</title>
+
+  <!-- Google Identity Services Script -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+
+  <!-- Styling -->
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #28a745;
+      color: white;
+      padding: 15px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    header h1 {
+      margin: 0;
+    }
+
+    nav {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      text-decoration: underline;
+    }
+
+    .box {
+      background-color: #fff;
+      padding: 25px;
+      margin: 60px auto;
+      max-width: 400px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px #ccc;
+    }
+
+    .box h2 {
+      text-align: center;
+      margin-top: 0;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    button {
+      background-color: #28a745;
+      color: white;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #218838;
+    }
+
+    .profile-container {
+      position: relative;
+      display: inline-block;
+      margin-left: 20px;
+    }
+
+    .profile-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    .profile-dropdown {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: white;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 10px;
+      border-radius: 6px;
+      z-index: 1;
+      width: 200px;
+    }
+
+    .profile-dropdown p {
+      margin: 5px 0;
+    }
+
+    .profile-dropdown a {
+      color: #28a745;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .profile-dropdown a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ✅ Navbar -->
+  <header>
+    <h1>Ranchi Zayka</h1>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="Best_selling.html">Best Selling</a>
+      <a href="order.html">Order</a>
+      <a href="location.html">Location</a>
+      <a href="reviews.html">Reviews</a>
+      <a href="credits.html">Credits</a>
+      <a href="contact_us.html">Contact Us</a>
+    </nav>
+
+    <!-- 👤 Profile Display -->
+    <div class="profile-container">
+      <img id="profile-icon" src="default-icon.png" alt="Profile" class="profile-icon" onclick="toggleProfile()" />
+      <div id="profile-dropdown" class="profile-dropdown">
+        <p><strong>Name:</strong> <span id="profile-name">Guest</span></p>
+        <p><strong>Email:</strong> <span id="profile-email">guest@example.com</span></p>
+        <a href="#">Logout</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- 📝 Login Form -->
+  <div class="box">
+    <h2>Sign In</h2>
+    <form action="login.php" method="post">
+      <input type="email" name="email" placeholder="Email Address" required />
+      <input type="password" name="password" placeholder="Password" required />
+      <button type="submit">Sign In</button>
+    </form>
+
+    <!-- Google Sign-In Button -->
+    <div id="g_id_onload"
+         data-client_id="282229009920-c3hc3aes6m1mus279qt4o0ptbc1f175v.apps.googleusercontent.com"
+         data-callback="handleCredentialResponse">
+    </div>
+    <div class="g_id_signin"
+         data-type="standard"
+         data-size="large"
+         data-theme="outline"
+         data-text="sign_in_with"
+         data-shape="rectangular"
+         data-logo_alignment="left">
+    </div>
+  </div>
+
+  <!-- ✅ Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+  <script>
+    function handleCredentialResponse(response) {
+      const data = jwt_decode(response.credential);
+      document.getElementById('profile-icon').src = data.picture;
+      document.getElementById('profile-name').textContent = data.name;
+      document.getElementById('profile-email').textContent = data.email;
+    }
+
+    function toggleProfile() {
+      const dropdown = document.getElementById('profile-dropdown');
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    window.onclick = function(event) {
+      if (!event.target.matches('.profile-icon')) {
+        const dropdown = document.getElementById('profile-dropdown');
+        if (dropdown) dropdown.style.display = 'none';
+      }
+    };
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,112 @@
+.best-selling {
+  padding: 40px;
+  background-color: #ffd343;
+  text-align: center;
+}
+
+.dish-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+.dish-card {
+  background: #fff7e4;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  padding: 20px;
+  width: 300px;
+  transition: transform 0.3s ease;
+}
+
+.align{
+  text-align: center;
+}
+
+.dish-card:hover {
+  transform: scale(1.05);
+}
+
+.dish-card img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.dish-card h3 {
+  margin: 10px 0;
+  color: #2c3e50;
+}
+
+.dish-card p {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+}
+
+.price {
+  display: block;
+  font-weight: bold;
+  color: #27ae60;
+  margin-top: 10px;
+}
+
+.badge {
+  display: inline-block;
+  margin-top: 8px;
+  padding: 5px 10px;
+  background-color: #f39c12;
+  color: white;
+  border-radius: 5px;
+  font-size: 0.8rem;
+}
+.navbar {
+  background-color: #d35400;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+.order-btn {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 8px 16px;
+  background-color: #27ae60;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.order-btn:hover {
+  background-color: #219150;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}

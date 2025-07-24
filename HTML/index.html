@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>RANCHI ZAYKA</title>
+
+  <!-- Google Identity Services -->
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/jwt-decode/build/jwt-decode.min.js"></script>
+
+  <!-- External Stylesheet -->
+  <link rel="stylesheet" href="css/index.css" />
+  <style>
+    .profile-wrapper {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+    #profile-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: white;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      padding: 12px;
+      z-index: 1000;
+      border-radius: 8px;
+      min-width: 200px;
+    }
+    .dropdown-content p {
+      margin: 5px 0;
+    }
+    #logoutBtn {
+      margin-top: 10px;
+      padding: 5px 10px;
+      background-color: #f44336;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="animate">
+    <h1>Ranchi Zayka</h1>
+
+    <nav>
+      <a href="Best_selling.html">Best Selling</a>
+      <a href="index.html">Home</a>
+      <a href="order.html">Order</a>
+      <a href="location.html">Location</a>
+      <a href="reviews.html">Reviews</a>
+      <a href="credits.html">Credits</a>
+      <a href="contact_us.html">Contact Us</a>
+    </nav>
+
+    <div class="profile-wrapper">
+      <img src="image/Default.png" id="profile-icon" onclick="toggleProfile()" />
+      <div id="profile-dropdown" class="dropdown-content">
+        <p id="profile-name">Guest</p>
+        <p id="profile-email">guest@example.com</p>
+
+        <div id="g_id_onload"
+             data-client_id="YOUR_CLIENT_ID"
+             data-callback="handleCredentialResponse"
+             data-auto_prompt="false">
+        </div>
+        <div class="g_id_signin"
+             data-type="standard"
+             data-size="medium"
+             data-theme="outline"
+             data-text="sign_in_with"
+             data-shape="rectangular"
+             data-logo_alignment="left">
+        </div>
+
+        <button id="logoutBtn">Logout</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="image-container">
+    <img src="image/AkshtestJ.webp" alt="IDK" class="fullscreen-img opacity-change" />
+    <div class="overlay-text">
+  <div class="overlay-box">
+    <h1>Welcome to Ranchi Zayka</h1>
+    <p>Step into the soul of Ranchi with every bite at Ranchi Zayka — where flavors tell stories and meals bring people together...</p>
+  </div>
+</div>
+
+  </div>
+
+  <section class="about-section">
+    <h2>About Ranchi Zayka</h2>
+    <div class="about-grid">
+      <div><h3>Service Options</h3><ul><li>No-contact delivery</li><li>Delivery</li><li>Takeaway</li><li>Dine-in</li></ul></div>
+      <div><h3>Popular For</h3><ul><li>Solo dining</li></ul></div>
+      <div><h3>Offerings</h3><ul><li>Quick bite</li><li>Small plates</li><li>Cuisine</li><li>Dishes</li></ul></div>
+      <div><h3>Atmosphere</h3><ul><li>Casual</li></ul></div>
+      <div><h3>Crowd</h3><ul><li>Groups</li></ul></div>
+      <div><h3>Payments</h3><ul><li>NFC mobile payments</li></ul></div>
+      <div><h3>Children</h3><ul><li>Good for kids</li></ul></div>
+    </div>
+  </section>
+
+  <script>
+    const animatedElements = document.querySelectorAll('.animate');
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        entry.isIntersecting
+          ? entry.target.classList.add('visible')
+          : entry.target.classList.remove('visible');
+      });
+    }, { threshold: 0.1 });
+    animatedElements.forEach(el => observer.observe(el));
+
+    window.addEventListener('load', () => {
+      document.querySelector('.overlay-text').style.opacity = '1';
+    });
+
+    function handleCredentialResponse(response) {
+      const data = jwt_decode(response.credential);
+      document.getElementById('profile-icon').src = data.picture;
+      document.getElementById('profile-name').textContent = data.name;
+      document.getElementById('profile-email').textContent = data.email;
+      localStorage.setItem('profilePicture', data.picture);
+      localStorage.setItem('profileName', data.name);
+      localStorage.setItem('profileEmail', data.email);
+    }
+
+    function toggleProfile() {
+      const dropdown = document.getElementById('profile-dropdown');
+      dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function logout() {
+      localStorage.removeItem('profilePicture');
+      localStorage.removeItem('profileName');
+      localStorage.removeItem('profileEmail');
+
+      document.getElementById('profile-icon').src = 'image/Default.png';
+      document.getElementById('profile-name').textContent = 'Guest';
+      document.getElementById('profile-email').textContent = 'guest@example.com';
+
+      document.getElementById('profile-dropdown').style.display = 'none';
+    }
+
+    document.getElementById("logoutBtn").addEventListener("click", logout);
+
+    window.onclick = function(event) {
+      if (!event.target.matches('#profile-icon')) {
+        const dropdown = document.getElementById('profile-dropdown');
+        if (dropdown) dropdown.style.display = 'none';
+      }
+    };
+
+    window.onload = function() {
+      const pic = localStorage.getItem('profilePicture');
+      const name = localStorage.getItem('profileName');
+      const email = localStorage.getItem('profileEmail');
+      if (pic) document.getElementById('profile-icon').src = pic;
+      if (name) document.getElementById('profile-name').textContent = name;
+      if (email) document.getElementById('profile-email').textContent = email;
+    };
+  </script>
+  <script src="js/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Secure Payment</title>
+  <link rel="stylesheet" href="css/payment.css" />
+  <script src="https://smtpjs.com/v3/smtp.js"></script>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="payment-container">
+      <h1>Choose Your Payment Method</h1>
+      <div id="emailDisplay" style="margin-bottom: 1em; font-weight: bold;"></div>
+
+      <form id="paymentForm">
+        <div class="method-group">
+          <div><span>💳 Credit Card</span><input type="radio" name="method" value="Credit Card" /></div>
+          <div><span>🏦 UPI</span><input type="radio" name="method" value="UPI" /></div>
+          <div><span>💻 Net Banking</span><input type="radio" name="method" value="Net Banking" /></div>
+          <div><span>💵 Cash on Delivery</span><input type="radio" name="method" value="Cash" /></div>
+        </div>
+
+        <div id="cardForm" class="hidden">
+          <input type="text" id="cardNumber" placeholder="Card Number" />
+          <input type="text" id="cardName" placeholder="Name on Card" />
+          <input type="text" id="expiry" placeholder="Expiry Date" />
+          <input type="text" id="cvv" placeholder="CVV" />
+        </div>
+
+        <div id="upiForm" class="hidden">
+          <input type="text" id="upiId" placeholder="Enter UPI ID (yourname@upi)" />
+        </div>
+
+        <div id="bankSelect" class="hidden">
+          <label for="bank">Select Bank:</label>
+          <select id="bank">
+            <option value="">--Choose Bank--</option>
+            <option value="SBI">SBI</option>
+            <option value="HDFC">HDFC</option>
+            <option value="ICICI">ICICI</option>
+            <option value="Axis">Axis Bank</option>
+          </select>
+        </div>
+
+        <div id="otpSection" class="hidden">
+          <label for="otp">Enter OTP:</label>
+          <input type="text" id="otp" maxlength="6" placeholder="6-digit OTP" />
+          <button type="button" id="verifyOtp">Verify OTP</button>
+        </div>
+        <br>
+        <button type="submit">Confirm Payment</button>
+      </form>
+
+      <div id="confirmation" class="hidden">
+        <h2>✅ Payment Confirmed</h2>
+        <p>Thank you for your order!</p>
+      </div>
+
+      <br>
+      <button id="sendOtpBtn" class="btn hidden">Send OTP</button>
+    </div>
+  </div>
+
+  <script src="js/payment.js"></script>
+</body>
+</html>

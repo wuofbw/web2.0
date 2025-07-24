@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>RANCHI ZAYKA</title>
+  <link rel="stylesheet" href="css/best_selling.css">
+  <style>
+    .animate {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-out;
+    }
+
+    .animate.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <header class="animate align">
+    <h1>Welcome to Ranchi Zayka</h1>
+    <nav class="navbar">
+      <ul>
+        <li><a href="index.html"> Home</a></li>
+        <li><a href="order.html"> Order</a></li>
+      </ul>
+    </nav>
+
+  </header>
+
+  <main>
+    <section class="best-selling animate">
+  <h2>🔥 Best Selling Dishes</h2>
+  <div class="dish-grid">
+      <div class="dish-card">
+       <img src="image/paneer.jpeg" alt="Paneer Tikka Masala" width="300">
+       <h3>Paneer Tikka Masala</h3>
+       <p>Grilled paneer cubes in creamy tomato gravy</p>
+       <span class="price">₹220</span>
+       <span class="badge">Customer Favorite</span>
+      <a href="order.html" class="order-btn">Order Now</a>
+</div>
+
+<div class="dish-card">
+  <img src="image/nonVEG.jpeg" alt="Chicken Biryani" width="300">
+  <h3>Chicken Biryani</h3>
+  <p>Fragrant rice with tender chicken and spices</p>
+  <span class="price">₹250</span>
+  <span class="badge">Most Ordered</span>
+  <a href="order.html" class="order-btn">Order Now</a>
+</div>
+
+
+</section>
+
+  </main>
+
+  <script>
+    const animatedElements = document.querySelectorAll('.animate');
+
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        } else {
+          entry.target.classList.remove('visible');
+        }
+      });
+    }, {
+      threshold: 0.1
+    });
+
+    animatedElements.forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirecting...</title>
+  <style>
+    body {
+      background-color: #f9f9f9;
+      font-family: 'Segoe UI', sans-serif;
+      text-align: center;
+      padding-top: 100px;
+      color: #333;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+    }
+    .message {
+      font-size: 1.5em;
+      margin-bottom: 20px;
+    }
+    .countdown {
+      font-size: 1.2em;
+      color: #555;
+    }
+  </style>
+  <script>
+    let seconds = 5;
+    const countdown = () => {
+      document.getElementById("countdown").textContent = seconds;
+      if (seconds === 0) {
+        window.location.href="payment.html"; // Replace with your target URL
+      }
+      seconds--;
+    };
+    setInterval(countdown, 1000);
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="message">You will be redirected in <span id="countdown">5</span> seconds...</div>
+    <div><a href="index.html">Click here if you're not redirected</a></div>
+  </div>
+</body>
+</html>
